@@ -48,6 +48,8 @@
 
 </div>
 
+![](https://gw.alicdn.com/tfs/TB1CdJ5ffzO3e4jSZFxXXaP_FXa-1466-562.png)
+
 
 **English | [简体中文](https://github.com/Fliggy-Mobile/ftoast/blob/master/README_CN.md)**
 

@@ -48,6 +48,7 @@
 
 </div>
 
+![](https://gw.alicdn.com/tfs/TB1CdJ5ffzO3e4jSZFxXXaP_FXa-1466-562.png)
 
 **[English](https://github.com/Fliggy-Mobile/ftoast) | 简体中文**
 
