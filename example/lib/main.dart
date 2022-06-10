@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:fbutton/fbutton.dart';
 import 'package:fcommon/fcommon.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -113,12 +112,12 @@ class _MyAppState extends State<MyApp> {
   }
 
   Widget buildFToast(BuildContext context) {
-    return FButton(
+    return FSuper(
       text: "Click to show FToast",
       style: TextStyle(color: mainTextTitleColor),
-      color: mainBackgroundColor,
+      backgroundColor: mainBackgroundColor,
       padding: EdgeInsets.all(12.0),
-      onPressed: () {
+      onClick: () {
         FToast.toast(
           context,
 
@@ -144,12 +143,12 @@ class _MyAppState extends State<MyApp> {
   }
 
   Widget buildSubMsg(BuildContext context) {
-    return FButton(
+    return FSuper(
       text: "Click to show FToast",
       style: TextStyle(color: mainTextTitleColor),
-      color: mainBackgroundColor,
+      backgroundColor: mainBackgroundColor,
       padding: EdgeInsets.all(12.0),
-      onPressed: () {
+      onClick: () {
         FToast.toast(
           context,
           msg: "This is Msg",
@@ -173,12 +172,12 @@ class _MyAppState extends State<MyApp> {
   AxisDirection up = AxisDirection.up;
 
   Widget buildImage(BuildContext context) {
-    return FButton(
+    return FSuper(
       text: "Click to show FToast",
       style: TextStyle(color: mainTextTitleColor),
-      color: mainBackgroundColor,
+      backgroundColor: mainBackgroundColor,
       padding: EdgeInsets.all(12.0),
-      onPressed: () {
+      onClick: () {
         switch (up) {
           case AxisDirection.up:
             up = AxisDirection.left;
@@ -218,12 +217,12 @@ class _MyAppState extends State<MyApp> {
   }
 
   Widget buildCustomToast(BuildContext context) {
-    return FButton(
+    return FSuper(
       text: "Click to show FToast",
       style: TextStyle(color: mainTextTitleColor),
-      color: mainBackgroundColor,
+      backgroundColor: mainBackgroundColor,
       padding: EdgeInsets.all(12.0),
-      onPressed: () {
+      onClick: () {
         FToast.toast(
           context,
 
@@ -256,11 +255,11 @@ class _Page_2State extends State<Page_2> {
     return Container(
       alignment: Alignment.center,
       color: mainBackgroundColor,
-      child: FButton(
+      child: FSuper(
         width: 100,
         height: 80,
-        color: mainBackgroundColor,
-        onPressed: () {
+        backgroundColor: mainBackgroundColor,
+        onClick: () {
           FToast.toast(context, msg: "Hi");
           Navigator.pop(context);
         },

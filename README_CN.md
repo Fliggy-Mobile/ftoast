@@ -13,12 +13,11 @@
 
 <p>帮助开发者创建灵活的，简洁的，精美的 Toast</p>
 
-<p><strong>主理人：<a href="">昌易</a>(<a href="fupeng.fp@alibaba-inc.com">fupeng.fp@alibaba-inc.com</a>)</strong></p>
-
+<p><strong>主理人：<a href="https://github.com/chenBingX">纽特</a>(<a href="coorchice.cb@alibaba-inc.com">coorchice.cb@alibaba-inc.com</a>)</strong></p>
 <p>
 
 <a href="https://pub.dev/packages/ftoast#-readme-tab-">
-    <img height="20" src="https://img.shields.io/badge/Version-1.0.0-important.svg">
+    <img height="20" src="https://img.shields.io/badge/Version-2.0.0-important.svg">
 </a>
 
 

@@ -1,11 +1,11 @@
 name: ftoast
 description: Help developers create flexible, concise and beautiful Toast.
-version: 1.0.0
-author: Changyi<fupeng.fp@alibaba-inc.com>
+version: 2.0.0
+author: CoorChice<coorchice.cb@alibaba-inc.com>
 homepage: https://github.com/Fliggy-Mobile/ftoast
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:

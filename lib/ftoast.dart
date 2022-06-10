@@ -12,8 +12,8 @@ import 'package:flutter/material.dart';
 /// ```
 /// FToast.toast(context, msg: "Hi, FWidget");
 class FToast {
-  static Queue<_ToastData> _entryQueue;
-  static _ToastData _current;
+  static Queue<_ToastData>? _entryQueue;
+  static _ToastData? _current;
 
   /// [context] - 页面环境
   /// [toast] - 自定义 toast 视图，会覆盖默认视图
@@ -46,18 +46,18 @@ class FToast {
   /// [imageSpace]-distance between icon and text
   static toast(
     final BuildContext context, {
-    final Widget toast,
+    final Widget? toast,
     final String msg = "",
-    final TextStyle msgStyle,
-    final String subMsg,
-    final TextStyle subMsgStyle,
+    final TextStyle? msgStyle,
+    final String? subMsg,
+    final TextStyle? subMsgStyle,
     final double subMsgSpace = 12.0,
     final double corner = 6.0,
     final Color color = Colors.black54,
     final int duration = 1800,
     final EdgeInsets padding =
         const EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0, bottom: 16.0),
-    final Widget image,
+    final Widget? image,
     final AxisDirection imageDirection = AxisDirection.up,
     final double imageSpace = 9.0,
   }) {
@@ -159,21 +159,23 @@ class FToast {
       ..context = context
       ..entry = entry
       ..duration = duration;
-    _entryQueue.addLast(toastData);
+    _entryQueue?.addLast(toastData);
     _show();
   }
 
   static _show() {
     if (_current == null) {
-      final _ToastData first =
-          _entryQueue.isNotEmpty ? _entryQueue.removeFirst() : null;
+      final _ToastData? first = (_entryQueue?.isNotEmpty ?? false)
+          ? _entryQueue?.removeFirst()
+          : null;
       _current = first;
       if (first != null) {
         try {
           if (first.context != null &&
-              (first.context.findRenderObject()?.attached ?? false)) {
-            OverlayState overlayState = Overlay.of(first.context);
-            overlayState.insert(first.entry);
+              (first.context!.findRenderObject()?.attached ?? false) &&
+              first.entry != null) {
+            OverlayState? overlayState = Overlay.of(first.context!);
+            overlayState?.insert(first.entry!);
             first.showed = true;
             Timer(Duration(milliseconds: first.duration), () {
               first.dispose();
@@ -193,9 +195,9 @@ class FToast {
 }
 
 class _ToastData {
-  OverlayEntry entry;
-  int duration;
-  BuildContext context;
+  OverlayEntry? entry;
+  int duration = 1800;
+  BuildContext? context;
   bool showed = false;
 
   dispose() {
