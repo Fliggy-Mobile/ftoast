@@ -29,6 +29,8 @@ class FToast {
   /// [image] - 图标
   /// [imageDirection] - 图标相对文本的位置
   /// [imageSpace] - 图标与文本的间距
+  /// [alignment] - Toast 在屏幕上的对齐位置，默认居中，可配置为 [Alignment.topCenter]、[Alignment.bottomCenter] 等
+  /// [ignoreDuplicate] - 是否忽略内容重复的 Toast。开启后，若相同内容的 Toast 正在显示或已在队列中，将不再重复入队
   ///
   /// [context]-page environment
   /// [toast]-custom toast view, will override the default view
@@ -44,6 +46,8 @@ class FToast {
   /// [image]-icon
   /// [imageDirection]-position of icon relative to text
   /// [imageSpace]-distance between icon and text
+  /// [alignment]-the alignment of the toast on the screen, centered by default, e.g. [Alignment.topCenter], [Alignment.bottomCenter]
+  /// [ignoreDuplicate]-whether to ignore toasts with duplicate content. When enabled, a new toast identical to one already showing or queued will be dropped
   static toast(
     final BuildContext context, {
     final Widget? toast,
@@ -60,6 +64,8 @@ class FToast {
     final Widget? image,
     final AxisDirection imageDirection = AxisDirection.up,
     final double imageSpace = 9.0,
+    final Alignment alignment = Alignment.center,
+    final bool ignoreDuplicate = false,
   }) {
     Widget buildToast() {
       TextStyle defaultStyle = TextStyle(
@@ -146,11 +152,24 @@ class FToast {
       return IgnorePointer(
         child: Material(
           color: Colors.transparent,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              toast ?? buildToast(),
-            ],
+          child: Padding(
+            padding: EdgeInsets.only(
+              top: alignment.y < 0
+                  ? MediaQueryData.fromWindow(window).padding.top + 16.0
+                  : 0.0,
+              bottom: alignment.y > 0
+                  ? MediaQueryData.fromWindow(window).padding.bottom + 16.0
+                  : 0.0,
+            ),
+            child: Align(
+              alignment: alignment,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  toast ?? buildToast(),
+                ],
+              ),
+            ),
           ),
         ),
       );
@@ -158,7 +177,22 @@ class FToast {
     _ToastData toastData = _ToastData()
       ..context = context
       ..entry = entry
-      ..duration = duration;
+      ..duration = duration
+      ..content = toast != null ? null : (msg + "\n" + (subMsg ?? ""));
+
+    /// 内容重复的 Toast 不再重复入队
+    ///
+    /// Drop the new toast if its content is identical
+    /// to one already showing or queued.
+    if (ignoreDuplicate && toast == null) {
+      final String content = toastData.content!;
+      final bool isShowing = _current?.content == content;
+      final bool inQueue =
+          _entryQueue?.any((data) => data.content == content) ?? false;
+      if (isShowing || inQueue) {
+        return;
+      }
+    }
     _entryQueue?.addLast(toastData);
     _show();
   }
@@ -185,9 +219,11 @@ class FToast {
           } else {
             first.dispose();
             _current = null;
+            _show();
           }
         } catch (e) {
           _current = null;
+          _show();
         }
       }
     }
@@ -199,6 +235,11 @@ class _ToastData {
   int duration = 1800;
   BuildContext? context;
   bool showed = false;
+
+  /// 用于判断 Toast 内容是否重复
+  ///
+  /// Used to check whether the toast content is duplicated
+  String? content;
 
   dispose() {
     if (showed) entry?.remove();

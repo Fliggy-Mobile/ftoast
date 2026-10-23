@@ -86,6 +86,24 @@ class _MyAppState extends State<MyApp> {
                       buildCustomToast(context),
                       const SizedBox(height: 500),
 
+                      buildTitle("Alignment"),
+                      buildMiddleMargin(),
+                      buildMiddleMargin(),
+                      buildMiddleMargin(),
+
+                      /// Alignment
+                      buildAlignment(context),
+                      const SizedBox(height: 500),
+
+                      buildTitle("IgnoreDuplicate"),
+                      buildMiddleMargin(),
+                      buildMiddleMargin(),
+                      buildMiddleMargin(),
+
+                      /// IgnoreDuplicate
+                      buildIgnoreDuplicate(context),
+                      const SizedBox(height: 500),
+
                       buildBiggestMargin(),
                       buildBiggestMargin(),
                     ],
@@ -236,6 +254,64 @@ class _MyAppState extends State<MyApp> {
             shadowColor: Colors.yellow,
             shadowBlur: 80,
           ),
+        );
+      },
+      corner: FCorner.all(20),
+      isSupportNeumorphism: true,
+    );
+  }
+
+  Alignment alignment = Alignment.center;
+
+  Widget buildAlignment(BuildContext context) {
+    return FSuper(
+      text: "Click to show FToast",
+      style: TextStyle(color: mainTextTitleColor),
+      backgroundColor: mainBackgroundColor,
+      padding: EdgeInsets.all(12.0),
+      onClick: () {
+        if (alignment == Alignment.center) {
+          alignment = Alignment.topCenter;
+        } else if (alignment == Alignment.topCenter) {
+          alignment = Alignment.bottomCenter;
+        } else {
+          alignment = Alignment.center;
+        }
+        FToast.toast(
+          context,
+
+          /// 配置 Toast 对齐位置
+          ///
+          /// set alignment
+          alignment: alignment,
+          msg: "I'm FToast: " +
+              (alignment == Alignment.topCenter
+                  ? "top"
+                  : (alignment == Alignment.bottomCenter
+                      ? "bottom"
+                      : "center")),
+        );
+      },
+      corner: FCorner.all(20),
+      isSupportNeumorphism: true,
+    );
+  }
+
+  Widget buildIgnoreDuplicate(BuildContext context) {
+    return FSuper(
+      text: "Click to show FToast",
+      style: TextStyle(color: mainTextTitleColor),
+      backgroundColor: mainBackgroundColor,
+      padding: EdgeInsets.all(12.0),
+      onClick: () {
+        FToast.toast(
+          context,
+
+          /// 忽略内容重复的 Toast
+          ///
+          /// ignore duplicate toast
+          ignoreDuplicate: true,
+          msg: "I'm FToast: duplicate",
         );
       },
       corner: FCorner.all(20),

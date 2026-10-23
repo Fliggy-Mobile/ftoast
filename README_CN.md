@@ -17,7 +17,7 @@
 <p>
 
 <a href="https://pub.dev/packages/ftoast#-readme-tab-">
-    <img height="20" src="https://img.shields.io/badge/Version-2.0.0-important.svg">
+    <img height="20" src="https://img.shields.io/badge/Version-2.1.0-important.svg">
 </a>
 
 
@@ -65,6 +65,10 @@
 
 - 支持队列展示
 
+- 支持配置 Toast 对齐位置（顶部 / 底部 / 任意位置）
+
+- 支持忽略内容重复的 Toast
+
 - 支持自定义 **Toast** 样式
 
 
@@ -94,6 +98,8 @@ FToast.toast(context, msg: "FToast");
 |image|Widget|false|null|图标|
 |imageDirection|AxisDirection|false|AxisDirection.up|图标相对文本的位置|
 |imageSpace|double|false|9.0|图标与文本的间距|
+|alignment|Alignment|false|Alignment.center|Toast 在屏幕上的对齐位置|
+|ignoreDuplicate|bool|false|false|忽略内容重复的 Toast（正在显示或在队列中时不再重复入队）|
 
 ## 🔩 基础使用
 
@@ -184,6 +190,34 @@ FToast.toast(
     shadowColor: Colors.yellow,
     shadowBlur: 80,
   ),
+)
+```
+
+## 📍 对齐位置
+
+```dart
+FToast.toast(
+  context,
+  msg: "I'm FToast",
+
+  /// 配置 Toast 对齐位置
+  ///
+  /// set alignment
+  alignment: Alignment.topCenter,
+)
+```
+
+## ♻️ 忽略重复内容
+
+```dart
+FToast.toast(
+  context,
+  msg: "I'm FToast",
+
+  /// 忽略内容重复的 Toast
+  ///
+  /// ignore duplicate toast
+  ignoreDuplicate: true,
 )
 ```
 

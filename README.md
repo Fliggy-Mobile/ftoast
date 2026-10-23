@@ -17,7 +17,7 @@
 <p>
 
 <a href="https://pub.dev/packages/ftoast#-readme-tab-">
-    <img height="20" src="https://img.shields.io/badge/Version-2.0.0-important.svg">
+    <img height="20" src="https://img.shields.io/badge/Version-2.1.0-important.svg">
 </a>
 
 
@@ -66,6 +66,10 @@
 
 - Support queue display
 
+- Support to align toast to top / bottom / anywhere
+
+- Support to ignore duplicate toasts
+
 - Support custom **Toast** style
 
 
@@ -95,6 +99,8 @@ FToast.toast(context, msg: "FToast");
 |image|Widget|false|null|icon|
 |imageDirection|AxisDirection|false|AxisDirection.up|position of icon relative to text|
 |imageSpace|double|false|9.0|distance between icon and text|
+|alignment|Alignment|false|Alignment.center|the alignment of the toast on the screen|
+|ignoreDuplicate|bool|false|false|drop a new toast whose content is identical to one already showing or queued|
 
 ## 🔩 Basic
 
@@ -185,6 +191,34 @@ FToast.toast(
     shadowColor: Colors.yellow,
     shadowBlur: 80,
   ),
+)
+```
+
+## 📍 Alignment
+
+```dart
+FToast.toast(
+  context,
+  msg: "I'm FToast",
+
+  /// 配置 Toast 对齐位置
+  ///
+  /// set alignment
+  alignment: Alignment.topCenter,
+)
+```
+
+## ♻️ IgnoreDuplicate
+
+```dart
+FToast.toast(
+  context,
+  msg: "I'm FToast",
+
+  /// 忽略内容重复的 Toast
+  ///
+  /// ignore duplicate toast
+  ignoreDuplicate: true,
 )
 ```
 
